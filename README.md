@@ -10,6 +10,7 @@ data.head(5)            # few observations
 print(data)
 
 #""" 1. Delete unnamed columns """
+
 df = data.drop(data.columns[data.columns.str.contains('unnamed',case = False)],axis = 1)
 df.shape
 df.columns
@@ -31,6 +32,7 @@ plt.xlabel('Gender', fontsize=12)
 plt.show()
 
 #""" 3. Show the top 5 most preferred names """
+
 #Group the names , Count and arrane in descending order
 preferred_names = df.groupby("Name").sum().sort_values(by = "Count",ascending=False)["Count"]  
 top_preferred_names = preferred_names.head(5)   # select top five
@@ -44,11 +46,13 @@ plt.xlabel('Name', fontsize=12)
 plt.show()
 
 #""" 4. What is the median name occurence in the dataset """
+
 preferred_names.median()
 
 median_name = preferred_names[preferred_names == preferred_names.median()]
 median_name
 
 #""" 5. Distribution of male and female born count by states """
+
 dist_by_states = pd.pivot_table(df, index = ["State", "Gender"], values= ["Count"], aggfunc=sum)
 dist_by_states
